@@ -2,7 +2,7 @@ import { Client, GatewayIntentBits, Partials } from "discord.js";
 
 import { Sern, SernEmitter } from "@sern/handler";
 import "dotenv/config";
-const { BotToken, defaultPrefix } = process.env;
+const { DISCORD_TOKEN, defaultPrefix } = process.env;
 
 export default class sern extends Client {
   constructor() {
@@ -29,7 +29,7 @@ export default class sern extends Client {
       commands: "dist/src/commands",
       events: "dist/src/events",
     });
-    (async () => {
+    /*(async () => {
       const acts = [
         {
           name: this.guilds?.cache.size,
@@ -41,7 +41,7 @@ export default class sern extends Client {
         },
       ] as any;
       let opt = Math.floor(Math.random() * acts.length);
-      await this.login().then(() => {
+      await this.login(DISCORD_TOKEN).then(() => {
         setInterval(async () => {
           this.user?.setPresence({
             activities: [
@@ -52,10 +52,13 @@ export default class sern extends Client {
             ],
             status: `dnd`,
           });
-        }, 5000);
+        }, 15000);
 
         console.log(`[CLIENT]: Logged in as ${this.user?.tag}`);
       });
-    })();
+    })();*/
+  }
+  async start() {
+    this.login();
   }
 }
