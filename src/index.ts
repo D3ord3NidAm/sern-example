@@ -26,39 +26,12 @@ export default class sern extends Client {
       client: this,
       sernEmitter: new SernEmitter(),
       defaultPrefix,
-      commands: "dist/src/commands",
-      events: "dist/src/events",
+      commands: "dist/commands",
+      events: "dist/events",
     });
-    /*(async () => {
-      const acts = [
-        {
-          name: this.guilds?.cache.size,
-          type: 3,
-        },
-        {
-          name: "/commands",
-          type: 5,
-        },
-      ] as any;
-      let opt = Math.floor(Math.random() * acts.length);
-      await this.login(DISCORD_TOKEN).then(() => {
-        setInterval(async () => {
-          this.user?.setPresence({
-            activities: [
-              {
-                name: `${acts[opt].name}`,
-                type: acts[opt].type,
-              },
-            ],
-            status: `dnd`,
-          });
-        }, 15000);
-
-        console.log(`[CLIENT]: Logged in as ${this.user?.tag}`);
-      });
-    })();*/
   }
+
   async start() {
-    this.login();
+    await this.login();
   }
 }
