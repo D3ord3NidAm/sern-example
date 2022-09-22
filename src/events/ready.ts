@@ -34,19 +34,5 @@ export default eventModule({
       });
       acts.push(currentAct); //readd act back to array
     }, 15000);
-    // setInterval(async () => {
-    //   for (const act of acts) {
-    //     sern.user?.setPresence({
-    //       activities: [
-    //         {
-    //           name: act.name.toString(),
-    //           type: act.type,
-    //         },
-    //       ],
-    //       status: act.status as PresenceStatusData,
-    //       // status: "dnd"
-    //     });
-    //   }
-    // }, 15000);
   },
 });
