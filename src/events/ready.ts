@@ -21,18 +21,32 @@ export default eventModule({
       },
     ];
     setInterval(async () => {
-      for (const act of acts) {
-        sern.user?.setPresence({
-          activities: [
-            {
-              name: act.name.toString(),
-              type: act.type,
-            },
-          ],
-          status: act.status as PresenceStatusData,
-          // status: "dnd"
-        });
-      }
+      const currentAct = acts.shift()!; //remove first act
+      sern.user?.setPresence({
+        activities: [
+          {
+            name: currentAct.name.toString(),
+            type: currentAct.type,
+          },
+        ],
+        status: currentAct.status as PresenceStatusData,
+        // status: "dnd"
+      });
+      acts.push(currentAct); //readd act back to array
     }, 15000);
+    // setInterval(async () => {
+    //   for (const act of acts) {
+    //     sern.user?.setPresence({
+    //       activities: [
+    //         {
+    //           name: act.name.toString(),
+    //           type: act.type,
+    //         },
+    //       ],
+    //       status: act.status as PresenceStatusData,
+    //       // status: "dnd"
+    //     });
+    //   }
+    // }, 15000);
   },
 });
