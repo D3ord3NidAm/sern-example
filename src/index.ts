@@ -1,19 +1,18 @@
-import { Client, GatewayIntentBits, Partials } from "discord.js";
-
+import { Client } from "discord.js";
 import { Sern, SernEmitter } from "@sern/handler";
 import "dotenv/config";
-const { DISCORD_TOKEN, defaultPrefix } = process.env;
+import { connection } from "mongoose";
+const { defaultPrefix } = process.env;
+import { Util } from "./tools/Utils";
+import { DisTube, DisTubeEvents, DisTubeHandler } from "distube";
+import { SpotifyPlugin } from "@distube/spotify";
 
 export default class sern extends Client {
+  utils: Util;
+  player: DisTube;
   constructor() {
     super({
-      intents: [
-        GatewayIntentBits.Guilds,
-        GatewayIntentBits.GuildMembers,
-        GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.MessageContent,
-      ],
-      partials: [Partials.GuildMember, Partials.GuildMember, Partials.Message],
+      intents: 131071,
       sweepers: {
         messages: {
           interval: 43200,
@@ -21,7 +20,11 @@ export default class sern extends Client {
         },
       },
     });
+    this.player = new DisTube(this, { directLink: true });
+
     Sern.addExternal(process);
+    Sern.addExternal(connection);
+
     Sern.init({
       client: this,
       sernEmitter: new SernEmitter(),
@@ -29,6 +32,7 @@ export default class sern extends Client {
       commands: "dist/commands",
       events: "dist/events",
     });
+    this.utils = new Util(this);
   }
 
   async start() {

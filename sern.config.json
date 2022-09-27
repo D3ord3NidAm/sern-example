@@ -4,5 +4,6 @@
     "base": "src",
     "commands": "commands",
     "events": "events"
-  }
+  },
+  "failMessage": "?"
 }

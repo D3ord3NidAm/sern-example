@@ -11,6 +11,7 @@
     "strictNullChecks": true,
     "importsNotUsedAsValues": "error",
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "typeRoots": ["./node_modules/@types", "./src/types"]
   }
 }
